@@ -1,47 +1,36 @@
 
-public class Professeur extends Personne{
-    private String nom;
+public class Professeur extends Personne implements Salarie{
     private int numSomme;
-    private String email;
     private String grade;
 
     public Professeur() {
     }
 
     public Professeur(String nom, int numSomme, String email, String grade) {
-        this.nom = nom;
+       super(nom,email);
         this.numSomme = numSomme;
-        this.email = email;
+
         this.grade = grade;
     }
 
-    public String getNom() {
-        return nom;
-    }
+
 
     public int getNumSomme() {
         return numSomme;
     }
 
-    public String getEmail() {
-        return email;
-    }
 
     public String getGrade() {
         return grade;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
+
 
     public void setNumSomme(int numSomme) {
         this.numSomme = numSomme;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+
 
     public void setGrade(String grade) {
         this.grade = grade;
@@ -56,4 +45,14 @@ public class Professeur extends Personne{
                 ", grade='" + grade + '\'' +
                 '}';
     }
+    public Float calculSalaire(Integer nbrHeures) {
+        if (nbrHeures < 32) return Float.valueOf(400 * nbrHeures * (1 - (34 / 100))+5000);
+        else return Float.valueOf((((nbrHeures - 32) * 600) * (1 - (34 / 100)) + (32 * 400) * (1 - (17 / 100)))+5000);
+    }
+
+    @Override
+    public Float calculVacances(Integer nbrJours) {
+        return Float.valueOf(nbrJours / 10);
+    }
+
 }
