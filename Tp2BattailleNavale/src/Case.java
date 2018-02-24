@@ -1,5 +1,5 @@
 /**
- * Cette classe represente  une case contenue de la grille du bataille
+ * Cette classe represente  une case contenue dans la grille du bataille
  *
  * @author Amine
  */
@@ -7,7 +7,7 @@ public class Case {
     /**
      * L'état d'une case prend la valeur true si elle a fait l'objet d'un tir et false sinon
      */
-    private boolean etat;
+    public boolean etat;
     private Bateau bateau;
 
 
@@ -42,7 +42,21 @@ public class Case {
     public void setState(boolean etat) {
         this.etat = etat;
     }
-    public void setBateau(Bateau bateau)
-    {this.bateau=bateau;}
 
+    /**
+     * la methode qui affecte un bateau a une case
+     */
+    public void setBateau(Bateau bateau) {
+        this.bateau = bateau;
+    }
+
+    /**
+     * la methode getBateau
+     *
+     * @return le bateau qui occupe la case
+     */
+
+    public Bateau getBateau() {
+        return bateau;
+    }
 }
