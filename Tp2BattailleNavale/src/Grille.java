@@ -83,25 +83,65 @@ public class Grille {
      * @param posy   cordonnee y du nouveau emplacement du bateau
      */
 
-    public void place(Bateau bateau, int posx, int posy) {
+    public int place(Bateau bateau, int posx, int posy) {
+        int error=0;
+        int checkpointh=0;
+        int checkpointv=0;
+        int intersection = 0;
         Boolean horizontal = bateau.horizontal;
-        if (horizontal && posx + bateau.getTaille() < this.getGrille().length) {
+        if (horizontal && (posx + bateau.getTaille()) < this.getGrille().length) {
+
             for (int i = 0; i < bateau.getTaille(); i++) {
                 // if (!bateau.getCases().get(i).equals(null))
                 //   bateau.removeCase(bateau.getCases().get(i));
+                if (this.getGrille()[posx + i][posy].isOccupe() == false) {
+                    bateau.ajouteCase(this.getGrille()[posx + i][posy]);
+                    this.getGrille()[posx + i][posy].setOccupe(true);
 
-                bateau.ajouteCase(this.getGrille()[posx + i][posy]);
+                } else {
+                    System.out.println("intersection !");
+                    intersection = 1;
+                    error=1;
+                    checkpointh=i;
+                    break;
+
+                }
             }
-        } else if (!horizontal && posx + bateau.getTaille() < this.getGrille()[posx].length) {
+        } else if (!horizontal && (posx + bateau.getTaille()) < this.getGrille()[posx].length) {
             for (int i = 0; i < bateau.getTaille(); i++) {
                 //if (!bateau.getCases().get(i).equals(null))
                 //  bateau.removeCase(bateau.getCases().get(i));
-                bateau.ajouteCase(this.getGrille()[posx][posy + i]);
+                if (this.getGrille()[posx][posy + i].isOccupe() == false) {
+                    bateau.ajouteCase(this.getGrille()[posx][posy + i]);
+                    this.getGrille()[posx][posy + i].setOccupe(true);
+                } else {
+                    System.out.println("intersection !");
+                    intersection = 2;
+                    error=1;
+                    checkpointv=i;
+                    break;
+                }
+            }}
+            else{error=1;}
+            if (intersection == 1) {
+                System.out.println("fixing intersection");
+                for (int i = 0; i < checkpointh; i++) {
+                    this.getGrille()[posx + i][posy].setOccupe(false);
+                }
+
+            } else if (intersection == 2) {
+                System.out.println("fixing intersection");
+
+                for (int i = 0; i < checkpointv; i++) {
+                    this.getGrille()[posx][posy + i].setOccupe(false);
+                }
+
             }
+
+
+            return error;
         }
 
-
-    }
 
     /**
      * la methode affiche pour afficher une grille

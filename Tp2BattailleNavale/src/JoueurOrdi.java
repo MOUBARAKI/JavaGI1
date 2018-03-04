@@ -20,9 +20,11 @@ public class JoueurOrdi extends Joueur {
     @Override
     public void placementBateaux() {
         Random random = new Random();
-        for (Bateau bateau : bateaux)
-            super.placeBateaux(random.nextInt(9), random.nextInt(9), random.nextBoolean(), bateau);
-    }
+        int error=0;
+        for (Bateau bateau : this.bateaux)
+            do{
+            error=super.placeBateaux(random.nextInt(9), random.nextInt(9), random.nextBoolean(), bateau);
+    }while(error==1);}
 
     /**
      * la methode tir qui utilise la methode tir pour attaquer l'adversaire

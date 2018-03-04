@@ -9,6 +9,7 @@ public class Case {
      */
     public boolean etat;
     private Bateau bateau;
+    private boolean occupe;
 
 
     /**
@@ -17,6 +18,7 @@ public class Case {
      */
     public Case() {
         this.etat = false;
+        this.occupe=false;
     }
 
     /**
@@ -58,5 +60,13 @@ public class Case {
 
     public Bateau getBateau() {
         return bateau;
+    }
+
+    public void setOccupe(boolean occupe) {
+        this.occupe = occupe;
+    }
+
+    public boolean isOccupe() {
+        return occupe;
     }
 }

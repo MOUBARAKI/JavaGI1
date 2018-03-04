@@ -27,6 +27,7 @@ public class Joueur {
     public Joueur(String nom) {
         this.nom = nom;
         this.grille = new Grille();
+
         for (int i = 0; i < NB_PORTEAVIONS; i++) {
             PorteAvions porteAvion = new PorteAvions();
             this.bateaux.add(porteAvion);
@@ -70,8 +71,8 @@ public class Joueur {
      */
 
 
-    public void placeBateaux(int posx, int posy, Boolean horizontal, Bateau bateau) {
-
+    public int placeBateaux(int posx, int posy, Boolean horizontal, Bateau bateau) {
+        int error = 0;
 
         if (horizontal)
             bateau.horizontal = true;
@@ -79,7 +80,9 @@ public class Joueur {
             bateau.horizontal = false;
 
 
-        this.grille.place(bateau, posx, posy);
+        if (this.grille.place(bateau, posx, posy) == 1)
+            error = 1;
+        return error;
 
     }
 
@@ -91,24 +94,28 @@ public class Joueur {
     public void placementBateaux() {
         for (Bateau bateau : this.bateaux
                 ) {
-            Scanner scan = new Scanner(System.in);
+            int error = 0;
+            do {
+                Scanner scan = new Scanner(System.in);
 
-            System.out.println("donner posx");
-            int posx = scan.nextInt();
-            System.out.println("donner posy");
-            int posy = scan.nextInt();
-            System.out.println("donner l'orientation");
-            int horizontal = scan.nextInt();
-            Boolean horizontale;
-            if (horizontal == 1) {
-                horizontale = true;
-            } else {
-                horizontale = false;
-            }
+                System.out.println("donner posx");
+                int posx = scan.nextInt();
+                System.out.println("donner posy");
+                int posy = scan.nextInt();
+                System.out.println("donner l'orientation");
+                int horizontal = scan.nextInt();
+                Boolean horizontale;
+                if (horizontal == 1) {
+                    horizontale = true;
+                } else {
+                    horizontale = false;
+                }
 
-            placeBateaux(posx, posy, horizontale, bateau);
+                error = placeBateaux(posx, posy, horizontale, bateau);
+            } while (error == 1);
         }
     }
+
 
     /**
      * la methode aPerdu
@@ -121,8 +128,6 @@ public class Joueur {
                 ) {
             if (!bateau.estCoule())
                 return false;
-
-
         }
         return true;
     }
