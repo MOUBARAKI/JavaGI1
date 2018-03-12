@@ -53,7 +53,7 @@ public class Operation {
 	 */
 	public String getAnnee(){
 		// TODO
-		return null;
+		return this.Date.split("/")[2];
 	}
 	/**
 	 * une méthode qui return le mois de la date 
@@ -61,7 +61,7 @@ public class Operation {
 	 */
 	public String getMois(){
 		// TODO
-		return null;
+		return this.Date.split("/")[1];
 	}
 	/**
 	 * une méthode qui return le jour de la date 
@@ -69,7 +69,7 @@ public class Operation {
 	 */
 	public String getJour(){
 		// TODO
-		return null;
+		return this.Date.split("/")[0];
 	}
 		
 }
