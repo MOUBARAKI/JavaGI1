@@ -65,17 +65,13 @@ public class Banque {
 	 *
 	 * @param id
 	 */
-	public void afficheTousComptesClient(Integer id, String mois, String année) {
-		for (Map.Entry<Integer, Client> entry : mesClients.entrySet()) {
-			Integer key = entry.getKey();
-			Client client = entry.getValue();
-			if (client.getId().equals(id)) {
-				for (Compte compte : client.mesComptes) {
-
-				}
-			}
-
-		}
-
-	}
+	
+	  public void afficheTousComptesClient(Integer id, String mois, String année) {
+        Client c = mesClients.get(id);
+        if (c != null) {
+            for (Compte c1 : c.mesComptes) {
+                if (c1 instanceof CompteCourant)
+                    ((CompteCourant) c1).afficheReleveCourant(mois, année);}
+            }
+        }
 }
